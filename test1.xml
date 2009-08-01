@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<kml xmlns="http://earth.google.com/kml/2.0"><Response>
+  <name>2214 Ivy Road, 22903</name>
+  <Status>
+    <code>200</code>
+    <request>geocode</request>
+  </Status>
+  <Placemark id="p1">
+    <address>2214 Ivy Rd, Charlottesville, VA 22903, USA</address>
+    <AddressDetails Accuracy="8" xmlns="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"><Country><CountryNameCode>US</CountryNameCode><CountryName>USA</CountryName><AdministrativeArea><AdministrativeAreaName>VA</AdministrativeAreaName><Locality><LocalityName>Charlottesville</LocalityName><Thoroughfare><ThoroughfareName>2214 Ivy Rd</ThoroughfareName></Thoroughfare><PostalCode><PostalCodeNumber>22903</PostalCodeNumber></PostalCode></Locality></AdministrativeArea></Country></AddressDetails>
+    <ExtendedData>
+      <LatLonBox north="38.0479496" south="38.0416544" east="-78.5136824" west="-78.5199776" />
+    </ExtendedData>
+    <Point><coordinates>-78.5168300,38.0448020,0</coordinates></Point>
+  </Placemark>
+</Response></kml>
