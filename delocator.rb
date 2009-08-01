@@ -4,8 +4,20 @@ require 'rubygems'
 require 'nokogiri'
 require 'uri'
 
+
+# open up the output file and zero it out
+output = "delocator_kml.xml"
+open(output, 'w')
+
+input = "delocator-through300.csv"
+
+kml = Nokogiri::XML::Document.new
+kml.root = Nokogiri::XML::Node.new("kml", kml)
+document = Nokogiri::XML::Node.new("Document", kml)
+kml.root.add_child(document)
+
 i = 0
-open('delocator-through300.csv').each{ |x|
+open(input).each{ |x|
   unless i > 10
     # puts x;
      a = x.split(';')
@@ -24,16 +36,30 @@ open('delocator-through300.csv').each{ |x|
     doc = Nokogiri::XML(open("http://maps.google.com/maps/geo?key=ABQIAAAAtFasZCbmNcgcbPYf2QzmthRGkJoeiq1SV3lUa19TijJY1xm5GBRktV-c1x5Up1VCIZtc-A1BNhljfg&sensor=false&output=xml&oe=utf8&q=#{URI.escape(address)},+#{zip}"))
 
     # only continue if google maps only found a single entry, otherwise it's too ambiguous
-    count = puts doc.xpath('//google:Placemark', 'google' => 'http://earth.google.com/kml/2.0').count
-    if count == 1    
+    count = doc.xpath('//google:Placemark', 'google' => 'http://earth.google.com/kml/2.0').count
+    if(count==1)    
       doc.xpath('//google:Placemark', 'google' => 'http://earth.google.com/kml/2.0').each do |place|
-        puts place.inspect
+        puts place.class
+        #puts place.inspect
+        place['id'] = number # replace the fake id with the id from the file
+        
+        #  new_node = Nokogiri::XML::Node.new("one", @document)
+        # > new_node[id] = "sip:alice@domain-net"
+        # > new_node.content = "Alice"
+        # 
+        # > parent_node.add_child(new_node)
+        name_node = Nokogiri::XML::Node.new("name", place)
+        #Nokogiri::XML::Node.new
+        document.add_child(place)
       end
     end
       
   end
   i = i+1
   } 
+  
+  open(output, 'w') { |f| f << kml.to_xml }
+  
   
   #require 'net/http' 
   # response = Net::HTTP.get_response('maps.google.com', '/maps/geo?key=ABQIAAAAtFasZCbmNcgcbPYf2QzmthRGkJoeiq1SV3lUa19TijJY1xm5GBRktV-c1x5Up1VCIZtc-A1BNhljfg&sensor=false&output=xml&oe=utf8&q=2214%20Ivy%20Road,%2022903') 
