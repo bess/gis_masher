@@ -18,10 +18,11 @@ kml.root.add_child(document)
 
 i = 0
 open(input).each{ |x|
-  unless i > 10
     # puts x;
      a = x.split(';')
-     a.collect! {|y| y.gsub('"','').strip }
+     next if a[4].nil? or a[7].nil? or a[2].nil?
+     next if a[4]=~/@/
+     a.collect! {|y| y.gsub('"','').strip rescue ''}
      #puts a.inspect
      
      number = a[0]
@@ -54,8 +55,6 @@ open(input).each{ |x|
       end
     end
       
-  end
-  i = i+1
   } 
   
   open(output, 'w') { |f| f << kml.to_xml }
