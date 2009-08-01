@@ -43,13 +43,13 @@ open(input).each{ |x|
         #puts place.inspect
         place['id'] = number # replace the fake id with the id from the file
         
-        #  new_node = Nokogiri::XML::Node.new("one", @document)
-        # > new_node[id] = "sip:alice@domain-net"
-        # > new_node.content = "Alice"
-        # 
-        # > parent_node.add_child(new_node)
-        name_node = Nokogiri::XML::Node.new("name", place)
-        #Nokogiri::XML::Node.new
+        name_node = Nokogiri::XML::Node.new("name", kml)
+        name_node.content = name
+        desc_node = Nokogiri::XML::Node.new("description", kml)
+        desc_node.content = desc
+        
+        place.add_child(name_node)
+        place.add_child(desc_node)
         document.add_child(place)
       end
     end
