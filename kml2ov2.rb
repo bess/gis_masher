@@ -1,5 +1,9 @@
 #!/opt/local/bin/ruby
 
+# Licensed under GPLv2
+# by Bess Sadler
+# inspired by a perl script written by Tor Arntsen
+
 # 1. Read in KML file
 # 2. Extract lat / long and name
 # 3. Write that information to an ov2 file
